@@ -1,12 +1,21 @@
-<h1>Welcome to Super Rentals</h1>
-
-We hope you find exactly what you're looking for in a place to stay.
-<br /><br />
-{{filter-listing filteredList=filteredList 
-autoComplete=(action 'autoComplete') search=(action 'search')}}
-{{#each model as |rentalUnit|}}
-  {{rental-listing rental=rentalUnit}}
-{{/each}}
-
-{{#link-to 'about'}}About{{/link-to}}
-{{#link-to 'contact'}}Click here to contact us.{{/link-to}}
+<div class="jumbotron">
+	<div class="container">
+		<h1 class="display-3">Welcome to Super Rentals</h1>
+		<p>We hope you find exactly what you're looking for in a place to stay..</p>
+		{{filter-listing filteredList=filteredList autoComplete=(action 'autoComplete') search=(action 'search')}}
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		{{#each model as |rentalUnit|}}
+		{{rental-listing rental=rentalUnit}}
+		{{/each}}
+	</div>
+	<hr>
+	<footer>
+		<p>
+			{{#link-to 'about'}}About{{/link-to}}
+			{{#link-to 'contact'}}Click here to contact us.{{/link-to}}
+		</p>
+	</footer>
+</div>
