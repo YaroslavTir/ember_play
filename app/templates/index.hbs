@@ -8,7 +8,7 @@
 <div class="container">
 	<div class="row">
 		{{#each model as |rentalUnit|}}
-		{{rental-listing rental=rentalUnit}}
+		{{rental-listing rental=rentalUnit saveRental=(action 'saveRental')}}
 		{{/each}}
 	</div>
 	<hr>

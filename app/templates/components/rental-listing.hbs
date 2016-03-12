@@ -1,9 +1,20 @@
 <div class="col-md-4">
-	<h2>{{rental.title}}</h2>
-	<p>Owner: {{rental.owner}}</p>
-	<p>Type: {{rental-property-type rental.type}} - {{rental.type}}</p>
-	<p>Location: {{rental.city}}</p>
-	<p>Number of bedrooms: {{rental.bedrooms}}</p>
+
+	{{#if isNotEdit}}
+		<h2>{{rental.title}}</h2>
+		<p>Owner: {{rental.owner}}</p>
+		<p>Type: {{rental-property-type rental.type}} - {{rental.type}}</p>
+		<p>Location: {{rental.city}}</p>
+		<p>Number of bedrooms: {{rental.bedrooms}}</p>
+		<a  class="btn btn-primary" href="#" role="button" {{action "editRental"}}>edit</a>
+	{{else}}
+		<p>{{input value=rental.title}}</p>
+		<p>{{input value=rental.owner}}</p>
+		<p>{{input value=rental.type}}</p>
+		<p>{{input value=rental.city}}</p>
+		<p>{{input value=rental.bedrooms}}</p>
+		<a  class="btn btn-primary" href="#" role="button" {{action "saveRental"}}>save</a>
+	{{/if}}
 
 	{{#if isImageShowing }}
 		<a  class="btn btn-primary" href="#" role="button" {{action "imageHide"}}>Hide image</a>

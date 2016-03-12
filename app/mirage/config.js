@@ -1,5 +1,4 @@
 export default function() {
-  this.get('/rentals', function(db, request) {
     let rentals = [{
         type: 'rentals',
         id: 1,
@@ -34,6 +33,32 @@ export default function() {
           image: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg'
         }
       }];
+
+  this.get('/rentals/:id', function(db, request) {
+    let result;
+    if(request.params.id !==undefined){
+      rentals.forEach(function(rental){
+        if (rental.id == request.params.id){
+          result =  rental; 
+        } 
+      });
+    }
+    return { data: result };
+  });
+
+  this.patch('/rentals:id', function(db, request) {
+    let result;
+    if(request.params.id !==undefined){
+      rentals.forEach(function(rental){
+        if (rental.id == request.params.id){
+          rental = request.requestBody;
+        } 
+      });
+    }
+    return { };
+  });
+
+  this.get('/rentals', function(db, request) {
 
     if(request.queryParams.city !== undefined) {
       let filteredRentals = rentals.filter(function(i) {
