@@ -1,41 +1,9 @@
 export default function() {
-    let rentals = [{
-        type: 'rentals',
-        id: 1,
-        attributes: {
-          title: 'Grand Old Mansion',
-          owner: 'Veruca Salt',
-          city: 'San Francisco',
-          type: 'Estate',
-          bedrooms: 15,
-          image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg'
-        }
-      }, {
-        type: 'rentals',
-        id: 2,
-        attributes: {
-          title: 'Urban Living',
-          owner: 'Mike Teavee',
-          city: 'Seattle',
-          type: 'Condo',
-          bedrooms: 1,
-          image: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Alfonso_13_Highrise_Tegucigalpa.jpg'
-        }
-      }, {
-        type: 'rentals',
-        id: 3,
-        attributes: {
-          title: 'Downtown Charm',
-          owner: 'Violet Beauregarde',
-          city: 'Portland',
-          type: 'Apartment',
-          bedrooms: 3,
-          image: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg'
-        }
-      }];
+
 
   this.get('/rentals/:id', function(db, request) {
     let result;
+    let rentals = db.rentals[0].rentals;
     if(request.params.id !==undefined){
       rentals.forEach(function(rental){
         if (rental.id == request.params.id){
@@ -46,19 +14,23 @@ export default function() {
     return { data: result };
   });
 
-  this.patch('/rentals:id', function(db, request) {
-    let result;
+
+  this.patch('/rentals/:id', function(db, request) {
+    let rentals = db.rentals[0].rentals;
+    let rentalUpdated = JSON.parse(request.requestBody).data;
     if(request.params.id !==undefined){
-      rentals.forEach(function(rental){
+      rentals.forEach(function(rental, index){
         if (rental.id == request.params.id){
-          rental = request.requestBody;
+          rentals[index] = rentalUpdated; 
+          return; 
         } 
       });
     }
-    return { };
+    return {data: rentalUpdated} ;
   });
 
   this.get('/rentals', function(db, request) {
+    let rentals = db.rentals[0].rentals;
 
     if(request.queryParams.city !== undefined) {
       let filteredRentals = rentals.filter(function(i) {

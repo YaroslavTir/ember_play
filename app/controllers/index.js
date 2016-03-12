@@ -19,12 +19,8 @@ export default Ember.Controller.extend({
         this.set('model').clear();
       } 
     },
-    saveRental(){
-      this.store.findRecord('rental', 2).then(function(rental){
-        rental.get('type');
-        rental.set('type', 'test');
-        rental.save();
-      })
+    saveRental(rental){
+      rental.save();
     }
   }
 });

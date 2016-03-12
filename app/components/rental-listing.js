@@ -12,8 +12,7 @@ export default Ember.Component.extend({
     },
     saveRental(){
       this.set('isNotEdit', true);	
-     //todo probably here we should call controller.save function. 
-      this.get('saveRental')();
+      this.get('saveRental')(this.get('rental'));
     },
     editRental(){
       this.set('isNotEdit', false);
